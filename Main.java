@@ -1,17 +1,14 @@
 import java.util.*;
 
 class Date implements Comparable<Date> {
-    private int day;
-    private int month;
-    private int year;
+    int day;
+    int month;
+    int year;
 
-    
-    private static final String[] MONTH_NAMES = {"", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-    
-    
-    private static final int[] DAYS_IN_MONTH = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    String[] MONTH_NAMES = {"", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    int[] DAYS_IN_MONTH = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-    public Date(int day, int month, int year) {
+    Date(int day, int month, int year) {
         if (isValidDate(day, month, year)) {
             this.day = day;
             this.month = month;
@@ -21,7 +18,7 @@ class Date implements Comparable<Date> {
         }
     }
 
-    public boolean isValidDate(int day, int month, int year) {
+    boolean isValidDate(int day, int month, int year) {
         if (year < 1 || month < 1 || month > 12 || day < 1) {
             return false;
         }
@@ -34,11 +31,11 @@ class Date implements Comparable<Date> {
         return day <= maxDays;
     }
 
-    private boolean isLeapYear(int year) {
+    boolean isLeapYear(int year) {
         return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
     }
 
-    public void updateDate(int day, int month, int year) {
+    void updateDate(int day, int month, int year) {
         if (isValidDate(day, month, year)) {
             this.day = day;
             this.month = month;
@@ -48,20 +45,20 @@ class Date implements Comparable<Date> {
         }
     }
 
-    public String getDayOfWeek() {
+    String getDayOfWeek() {
         Calendar calendar = new GregorianCalendar(year, month - 1, day);
         String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
         return days[calendar.get(Calendar.DAY_OF_WEEK) - 1];
     }
 
-    public int calculateDifference(Date otherDate) {
+    int calculateDifference(Date otherDate) {
         Calendar c1 = new GregorianCalendar(year, month - 1, day);
         Calendar c2 = new GregorianCalendar(otherDate.year, otherDate.month - 1, otherDate.day);
         long diff = Math.abs(c1.getTimeInMillis() - c2.getTimeInMillis());
         return (int) (diff / (1000 * 60 * 60 * 24));
     }
 
-    public void printDate() {
+    void printDate() {
         System.out.println(MONTH_NAMES[month] + " " + day + ", " + year);
     }
 
@@ -77,7 +74,7 @@ class Date implements Comparable<Date> {
     }
 }
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         List<Date> dates = new ArrayList<>();
         
@@ -101,12 +98,11 @@ public class Main {
             d.printDate();
         }
         
-        
         Date d1 = new Date(10, 4, 2023);
         Date d2 = new Date(25, 4, 2023);
         System.out.println("\nDifference between dates: " + d1.calculateDifference(d2) + " days");
         
-        
         System.out.println("Day of the week for 10 April 2023: " + d1.getDayOfWeek());
     }
 }
+
