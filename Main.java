@@ -14,7 +14,7 @@ class Date implements Comparable<Date> {
             this.month = month;
             this.year = year;
         } else {
-            throw new IllegalArgumentException("Invalid date");
+            System.out.println("Invalid date: " + day + "/" + month + "/" + year);
         }
     }
 
@@ -41,7 +41,7 @@ class Date implements Comparable<Date> {
             this.month = month;
             this.year = year;
         } else {
-            throw new IllegalArgumentException("Invalid date");
+            System.out.println("Invalid date update: " + day + "/" + month + "/" + year);
         }
     }
 
@@ -78,14 +78,10 @@ class Main {
     public static void main(String[] args) {
         List<Date> dates = new ArrayList<>();
         
-        try {
-            dates.add(new Date(15, 3, 2024));
-            dates.add(new Date(1, 1, 2023));
-            dates.add(new Date(29, 2, 2020)); 
-            dates.add(new Date(5, 7, 2025));
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        dates.add(new Date(15, 3, 2024));
+        dates.add(new Date(1, 1, 2023));
+        dates.add(new Date(29, 2, 2020)); 
+        dates.add(new Date(5, 7, 2025));
         
         System.out.println("Original Dates:");
         for (Date d : dates) {
@@ -105,4 +101,5 @@ class Main {
         System.out.println("Day of the week for 10 April 2023: " + d1.getDayOfWeek());
     }
 }
+
 
